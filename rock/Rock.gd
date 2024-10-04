@@ -28,7 +28,7 @@ func _integrate_forces(physics_state):
 	physics_state.transform = xform
 
 func explode():
-	$CollisionShape2D.set_deferred("disabeled", true)
+	$CollisionShape2D.set_deferred("disabled", true)
 	$Sprite2D.hide()
 	$Explosion/AnimationPlayer.play("explosion")
 	$Explosion.show()

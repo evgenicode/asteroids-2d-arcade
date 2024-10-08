@@ -52,6 +52,7 @@ func change_state(new_state):
 		INVULNERABLE:
 			$CollisionShape2D.set_deferred("disabled", true)
 			$Sprite2D.modulate.a = 0.5
+			$InvulnerabilityTimer.start()
 		DEAD:
 			$CollisionShape2D.set_deferred("disabled", true)
 			$Sprite2D.hide()
@@ -98,3 +99,22 @@ func reset():
 	
 func _on_invulnerability_timer_timeout():
 	change_state(ALIVE)
+
+
+func _on_body_entered(body):
+	if body.is_in_group("rocks"):
+		body.explode()
+		lives -= 1
+		explode()
+
+func explode():
+	$Explosion.show()
+	$Explosion/AnimationPlayer.play("explosion")
+	await $Explosion/AnimationPlayer.animation_finished
+	$Explosion.hide()
+	
+		
+		
+		
+		
+		

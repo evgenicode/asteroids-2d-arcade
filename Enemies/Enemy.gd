@@ -10,9 +10,16 @@ var target = null
 
 func _ready():
 	$Sprite2D.frame = randi() % 3
-	var path = $EnemyPaths.get_children() [randi() % $EnemyPaths.get_child_count()]
+	var path = $EnemyPaths.get_children()[randi() % $EnemyPaths.get_child_count()]
 	path.add_child(follow)
 	follow.loop = false
+	
+func _physics_process(delta):
+	rotation += deg_to_rad(rotation_speed) * delta
+	follow.progress += speed * delta
+	position = follow.global_position
+	if follow.progress_ratio >= 1:
+		queue_free()
 
 func _on_gun_cooldown_timeout():
 	pass # Replace with function body.

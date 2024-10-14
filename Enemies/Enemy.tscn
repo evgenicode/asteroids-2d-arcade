@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bba7d85yb3hen"]
+[gd_scene load_steps=10 format=3 uid="uid://bba7d85yb3hen"]
 
 [ext_resource type="Texture2D" uid="uid://ca3s4eg1kfdhn" path="res://assets/enemy_saucer.png" id="1_in6rp"]
 [ext_resource type="Script" path="res://Enemies/Enemy.gd" id="1_s7ygr"]
+[ext_resource type="PackedScene" uid="uid://csmr8r5fidxd4" path="res://Bullet/enemy_bullet.tscn" id="2_ehdh1"]
 [ext_resource type="PackedScene" uid="uid://yxj2sjkky2pn" path="res://Enemies/EnemyPaths.tscn" id="3_oaoeu"]
 [ext_resource type="PackedScene" uid="uid://rk7cb4ga2ovr" path="res://expolosions/explosion.tscn" id="4_imehu"]
 
@@ -48,6 +49,7 @@ _data = {
 
 [node name="Area2D" type="Area2D" groups=["enemies"]]
 script = ExtResource("1_s7ygr")
+bullet_scene = ExtResource("2_ehdh1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_in6rp")

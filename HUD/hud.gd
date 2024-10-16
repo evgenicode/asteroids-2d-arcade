@@ -14,6 +14,14 @@ var bar_textures = {
 	"red": preload("res://assets/bar_red_200.png")
 }
 
+func update_shield(value):
+	shield_bar.texture_progress = bar_textures["green"]
+	if value < 0.4:
+		shield_bar.texture_progress = bar_textures["red"]
+	elif value < 0.7:
+		shield_bar.texture_progress = bar_textures["yellow"]
+	shield_bar.value = value
+
 func show_message(text):
 	message.text = text
 	message.show()

@@ -28,6 +28,7 @@ func shoot():
 	var b = bullet_scene.instantiate()
 	get_tree().root.add_child(b)
 	b.start(global_position, dir)
+	$Shoot.play()
 
 func _on_gun_cooldown_timeout():
 	shoot()
@@ -45,6 +46,7 @@ func take_damage(amount):
 		explode()
 		
 func explode():
+	$ExplosionSound.play()
 	speed = 0
 	$GunCooldown.stop()
 	$CollisionShape2D.set_deferred("disabled", true)

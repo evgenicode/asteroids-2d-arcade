@@ -11,6 +11,9 @@ var playing = false
 
 func _ready():
 	screensize = get_viewport().get_visible_rect().size
+	#for development only
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), -20)
+	
 	
 func _process(delta):
 	if not playing:
@@ -28,17 +31,21 @@ func new_game():
 	$Player.reset()
 	await $HUD/Timer.timeout
 	playing = true
+	$Music.play()
 	
 func new_level():
 	level += 1
 	$HUD.show_message("Wave %s" % level)
 	for i in level:
 		spawn_rock(3)
+	$LevelupSound.play()	
 	$EnemyTimer.start(randf_range(5, 10))
+	
 		
 func game_over():
 	playing = false
 	$HUD.game_over()
+	$Music.stop()
 		
 func spawn_rock(size, pos=null, vel=null):
 	if pos == null:
@@ -53,6 +60,7 @@ func spawn_rock(size, pos=null, vel=null):
 	r.exploded.connect(self._on_rock_exploded)
 
 func _on_rock_exploded(size, radius, pos, vel):
+	$ExplosionSound.play()
 	if size <= 1:
 		return
 	for offset in [-1, 1]:

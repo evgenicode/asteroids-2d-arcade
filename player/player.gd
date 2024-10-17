@@ -9,7 +9,7 @@ extends RigidBody2D
 
 signal lives_changed
 signal dead
-signal shield_changed
+signal shield_changed(value)
 
 
 var can_shoot = true

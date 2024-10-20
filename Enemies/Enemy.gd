@@ -31,8 +31,8 @@ func shoot():
 	$Shoot.play()
 
 func _on_gun_cooldown_timeout():
-	shoot()
-	#shoot_pulse(3, 0.15)
+	#shoot()
+	shoot_pulse(3, 0.15)
 	
 func shoot_pulse(n, delay):
 	for i in n:

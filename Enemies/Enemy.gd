@@ -6,6 +6,8 @@ extends Area2D
 @export var health = 3
 @export var bullet_spread = 0.2
 
+signal enemy_dead
+
 var follow = PathFollow2D.new()
 var target = null
 
@@ -46,6 +48,7 @@ func take_damage(amount):
 		explode()
 		
 func explode():
+	enemy_dead.emit()
 	$ExplosionSound.play()
 	speed = 0
 	$GunCooldown.stop()
@@ -54,6 +57,7 @@ func explode():
 	$Explosion.show()
 	$Explosion/AnimationPlayer.play("explosion")
 	await $Explosion/AnimationPlayer.animation_finished
+	
 	queue_free()
 
 

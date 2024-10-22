@@ -64,7 +64,7 @@ func _on_rock_exploded(size, radius, pos, vel):
 	if size <= 1:
 		$HUD.update_score(size)
 		return
-	for offset in [-1, 1]:
+	for offset in [-1, 1]:	
 		var dir = $Player.position.direction_to(pos).orthogonal() * offset
 		var newpos = pos + dir * radius
 		var newvel = dir * vel.length() * 1.1
@@ -89,4 +89,9 @@ func _on_enemy_timer_timeout():
 	var e = enemy_scene.instantiate()
 	add_child(e)
 	e.target = $Player
+	e.connect("enemy_dead", Callable(self, "_on_enemy_destroyed"))
 	$EnemyTimer.start(randf_range(20, 40))
+	
+	
+func _on_enemy_destroyed():
+	$HUD.update_score(5)
